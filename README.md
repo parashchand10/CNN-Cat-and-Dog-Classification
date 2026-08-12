@@ -83,3 +83,47 @@ Sigmoid
    │
    ▼
 Cat / Dog
+
+```
+---
+
+## Installation & Setup
+
+Follow the steps below to run the project locally.
+
+### Prerequisites
+
+Before installing the project, make sure you have:
+
+- Python 3.13 (64-bit)
+- Git
+- pip
+- A code editor such as VS Code
+
+> **Important:** For this project, Python **3.13 (64-bit)** is recommended.
+>
+> TensorFlow currently provides supported packages for Python **3.10–3.13**. Python **3.14 is not currently listed as a supported version** by TensorFlow.
+
+Follow these steps to run the project locally:
+```
+# 1. Clone the repository
+git clone https://github.com/YOUR_USERNAME/CNN-Cat-and-Dog-Classification.git
+
+# 2. Open the project folder
+cd CNN-Cat-and-Dog-Classification
+
+# 3. Create a Python 3.13 virtual environment
+py -3.13 -m venv venv
+
+# 4. Activate the virtual environment
+venv\Scripts\activate
+
+# 5. Upgrade pip
+python -m pip install --upgrade pip
+
+# 6. Install project dependencies
+pip install -r requirements.txt
+
+# 7. Start the Flask application
+python app.py
+```
