@@ -6,7 +6,7 @@ The trained CNN model is integrated with a **Flask web application**, allowing u
 
 ---
 
-## 🚀 Project Overview
+## Project Overview
 
 This project demonstrates an end-to-end Deep Learning workflow:
 
@@ -26,19 +26,19 @@ The model accepts images resized to **150 × 150 pixels** and normalizes pixel v
 
 ## ✨ Features
 
-- 🐱 Cat vs Dog image classification
-- 🧠 Custom CNN architecture
-- 📤 Image upload through web interface
-- 📊 Prediction confidence
-- ⚡ Real-time prediction using Flask
-- 🔍 Input image preprocessing
-- ⚠️ Low-confidence image rejection
-- 💾 Saved `.h5` trained model
-- 🌐 Simple browser-based interface
+- Cat vs Dog image classification
+- Custom CNN architecture
+- Image upload through web interface
+- Prediction confidence
+- Real-time prediction using Flask
+- Input image preprocessing
+- Low-confidence image rejection
+- Saved `.h5` trained model
+- Simple browser-based interface
 
 ---
 
-## 🧠 CNN Model Architecture
+## CNN Model Architecture
 
 The model uses a Sequential CNN architecture:
 
