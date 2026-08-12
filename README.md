@@ -24,7 +24,7 @@ The model accepts images resized to **150 × 150 pixels** and normalizes pixel v
 
 ---
 
-## ✨ Features
+## Features
 
 - Cat vs Dog image classification
 - Custom CNN architecture
