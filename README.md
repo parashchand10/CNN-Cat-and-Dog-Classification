@@ -40,8 +40,8 @@ The model accepts images resized to **150 × 150 pixels** and normalizes pixel v
 
 Workflow Diagram
 ---
-<img src="Input Screen.png" alt="n8n Project" width="3000" height="3000" />
-<img src="Predection.png" alt="n8n Project" width="3000" height="3000" />
+<img src="Input Screen.png" alt="CNN Project" width="3000" height="3000" />
+<img src="Predection.png" alt="CNN Project" width="3000" height="3000" />
 
 ---
 
