@@ -38,10 +38,9 @@ The model accepts images resized to **150 × 150 pixels** and normalizes pixel v
 
 ---
 
-Workflow Diagram
+PetVision AI — Image Interface
 ---
-<img src="Input Screen.png" alt="CNN Project" width="3000" height="3000" />
-<img src="Predection.png" alt="CNN Project" width="3000" height="3000" />
+<img src="petvision-ai-input-screen.png" alt="CNN Project" width="3000" height="3000" />
 
 ---
 
@@ -92,6 +91,14 @@ Sigmoid
 Cat / Dog
 
 ```
+---
+
+PetVision AI — Classification Result
+
+---
+
+<img src="petvision-ai-classification-result.png" alt="CNN Project" width="3000" height="3000" />
+
 ---
 
 ## Installation & Setup
