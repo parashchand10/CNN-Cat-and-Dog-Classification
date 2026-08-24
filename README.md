@@ -6,7 +6,7 @@ The trained CNN model is integrated with a **Flask web application**, allowing u
 
 ---
 
-PetVision AI — Image Interface
+## PetVision AI — Image Interface
 
 <img src="petvision-ai-input-screen.png" alt="CNN Project" width="3000" height="3000" />
 
@@ -93,7 +93,7 @@ Cat / Dog
 ```
 ---
 
-PetVision AI — Classification Result
+## PetVision AI — Classification Result
 
 <img src="petvision-ai-classification-result.png" alt="CNN Project" width="3000" height="3000" />
 
