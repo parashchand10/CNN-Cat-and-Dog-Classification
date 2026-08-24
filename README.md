@@ -6,6 +6,12 @@ The trained CNN model is integrated with a **Flask web application**, allowing u
 
 ---
 
+PetVision AI — Image Interface
+---
+<img src="petvision-ai-input-screen.png" alt="CNN Project" width="3000" height="3000" />
+
+---
+
 ## Project Overview
 
 This project demonstrates an end-to-end Deep Learning workflow:
@@ -35,12 +41,6 @@ The model accepts images resized to **150 × 150 pixels** and normalizes pixel v
 - Low-confidence image rejection
 - Saved `.h5` trained model
 - Simple browser-based interface
-
----
-
-PetVision AI — Image Interface
----
-<img src="petvision-ai-input-screen.png" alt="CNN Project" width="3000" height="3000" />
 
 ---
 
