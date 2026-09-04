@@ -1,37 +1,40 @@
 import os
 from flask import Flask, render_template, request
-from tensorflow.keras.models import load_model
-from tensorflow.keras.preprocessing import image
+from PIL import Image
 import numpy as np
+from ai_edge_litert.interpreter import Interpreter
 
 app = Flask(__name__)
 UPLOAD_FOLDER = 'static/uploads'
 app.config['UPLOAD_FOLDER'] = UPLOAD_FOLDER
-
 os.makedirs(UPLOAD_FOLDER, exist_ok=True)
 
-# Load your model
-model = load_model("cat_dog_cnn_model.h5")
+# Load TFLite Model
+MODEL_PATH = "cat_dog_cnn_model.tflite"
+interpreter = Interpreter(model_path=MODEL_PATH)
+interpreter.allocate_tensors()
 
-REJECTION_THRESHOLD = 0.60      # used for single-label (binary / 3-class) models
-MULTI_LABEL_THRESHOLD = 0.50    # used for 2-output multi-label models
-IMG_SIZE = (150, 150)           # confirmed training input size
+input_details = interpreter.get_input_details()
+output_details = interpreter.get_output_details()
+
+REJECTION_THRESHOLD = 0.60
+MULTI_LABEL_THRESHOLD = 0.50
+IMG_SIZE = (150, 150)
 
 
 def predict_image(img_path):
-    img = image.load_img(img_path, target_size=IMG_SIZE)
-    img_array = image.img_to_array(img)
-    img_array = np.expand_dims(img_array, axis=0) / 255.0
+    img = Image.open(img_path).convert('RGB')
+    img = img.resize(IMG_SIZE)
+    img_array = np.array(img, dtype=np.float32) / 255.0
+    img_array = np.expand_dims(img_array, axis=0)
 
-    predictions = model.predict(img_array)[0]
-
-    # Debug: check your terminal to see what your model actually outputs.
-    print("Raw model output:", predictions, "shape:", predictions.shape)
+    interpreter.set_tensor(input_details[0]['index'], img_array)
+    interpreter.invoke()
+    predictions = interpreter.get_tensor(output_details[0]['index'])[0]
 
     n_outputs = predictions.shape[0]
 
     if n_outputs == 1:
-        # Binary sigmoid model: single value = P(dog). P(cat) = 1 - P(dog)
         dog_prob = float(predictions[0])
         cat_prob = 1.0 - dog_prob
         confidence = max(dog_prob, cat_prob)
@@ -43,8 +46,6 @@ def predict_image(img_path):
         return {"cat_pct": cat_prob * 100, "dog_pct": dog_prob * 100, "winner": winner}
 
     elif n_outputs == 2:
-        # Multi-label model: independent probabilities [cat_prob, dog_prob].
-        # This is the setup that actually supports detecting "both" in one image.
         cat_prob, dog_prob = float(predictions[0]), float(predictions[1])
         cat_present = cat_prob >= MULTI_LABEL_THRESHOLD
         dog_present = dog_prob >= MULTI_LABEL_THRESHOLD
@@ -56,7 +57,6 @@ def predict_image(img_path):
         return {"cat_pct": cat_prob * 100, "dog_pct": dog_prob * 100, "winner": winner}
 
     else:
-        # 3-class softmax: [Cat, Dog, Both]
         cat_prob, dog_prob, both_prob = (float(p) for p in predictions[:3])
         confidence = max(cat_prob, dog_prob, both_prob)
 
@@ -106,4 +106,5 @@ def index():
 
 
 if __name__ == "__main__":
-    app.run(debug=True, port=5001)
+    port = int(os.environ.get("PORT", 5001))
+    app.run(host="0.0.0.0", port=port)
