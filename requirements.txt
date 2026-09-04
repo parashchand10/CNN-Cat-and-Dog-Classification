@@ -1,5 +1,5 @@
-tensorflow
 Flask
-numpy
-pillow
 gunicorn
+Pillow
+numpy
+ai-edge-litert
