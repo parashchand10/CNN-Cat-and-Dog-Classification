@@ -2,11 +2,11 @@
 
 PetVision AI is an end-to-end computer vision web application that classifies images of cats and dogs in real time. Powered by a custom **Convolutional Neural Network (CNN)** optimized into TensorFlow Lite, it delivers fast, lightweight inference served through a responsive Flask web interface.
 
-## Demo
+[![Live Demo](https://img.shields.io/badge/Render-Live%20Demo-informational)](https://cnn-cat-and-dog-classification.onrender.com)
 
-| Input | Result |
-|---|---|
-| ![Input screen](petvision-ai-input-screen.png) | ![Classification result](petvision-ai-classification-result.png) |
+Input Screen
+
+![Input screen](petvision-ai-input-screen.png) 
 
 ## Features
 
@@ -71,3 +71,6 @@ Then open `http://localhost:5000` and upload an image.
 3. **Build command:** `pip install -r requirements.txt`
 4. **Start command:** `gunicorn app:app`
 
+## Output
+
+![Classification result](petvision-ai-classification-result.png)
