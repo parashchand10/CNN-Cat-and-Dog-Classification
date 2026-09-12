@@ -2,7 +2,11 @@
 
 PetVision AI is an end-to-end computer vision web application that classifies images of cats and dogs in real time. Powered by a custom **Convolutional Neural Network (CNN)** optimized into TensorFlow Lite, it delivers fast, lightweight inference served through a responsive Flask web interface.
 
-[![Live Demo](https://img.shields.io/badge/Render-Live%20Demo-informational)](https://cnn-cat-and-dog-classification.onrender.com)
+---
+
+**Live Demo:** [CNN Cat & Dog Classification](https://cnn-cat-and-dog-classification.onrender.com)
+
+---
 
 Input Screen
 
