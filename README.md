@@ -1,141 +1,74 @@
-# 🐱🐶 Cat & Dog Image Classification using CNN
+# Cat vs. Dog Classifier — Flask App
 
-A Deep Learning web application that classifies uploaded images as **Cat** or **Dog** using a Convolutional Neural Network (CNN).
+A small Flask web app that serves the `cat_dog_cnn_model_v2.keras` model
+(trained in `Fine_Tune.ipynb`) for real-time cat/dog image predictions.
 
-The trained CNN model is integrated with a **Flask web application**, allowing users to upload an image and receive a prediction with confidence scores.
-
----
-
-## PetVision AI — Image Interface
-
-<img src="petvision-ai-input-screen.png" alt="CNN Project" width="3000" height="3000" />
-
----
-
-## Project Overview
-
-This project demonstrates an end-to-end Deep Learning workflow:
-
-- Dataset preparation
-- Image preprocessing
-- CNN model development
-- Model training and validation
-- Model evaluation
-- Model saving
-- Flask web application integration
-- Image upload and prediction
-- Prediction confidence display
-
-The model accepts images resized to **150 × 150 pixels** and normalizes pixel values to the range **0–1** before prediction.
-
----
-
-## Features
-
-- Cat vs Dog image classification
-- Custom CNN architecture
-- Image upload through web interface
-- Prediction confidence
-- Real-time prediction using Flask
-- Input image preprocessing
-- Low-confidence image rejection
-- Saved `.h5` trained model
-- Simple browser-based interface
-
----
-
-## CNN Model Architecture
-
-The model uses a Sequential CNN architecture:
-
-```text
-Input Image
-   │
-   ▼
-150 × 150 × 3
-   │
-   ▼
-Conv2D - 32 Filters
-   │
-   ▼
-MaxPooling2D
-   │
-   ▼
-Conv2D - 64 Filters
-   │
-   ▼
-MaxPooling2D
-   │
-   ▼
-Conv2D - 128 Filters
-   │
-   ▼
-MaxPooling2D
-   │
-   ▼
-Flatten
-   │
-   ▼
-Dense - 512 Neurons
-   │
-   ▼
-Dropout - 0.5
-   │
-   ▼
-Dense - 1 Neuron
-   │
-   ▼
-Sigmoid
-   │
-   ▼
-Cat / Dog
+## Project structure
 
 ```
----
-
-## PetVision AI — Classification Result
-
-<img src="petvision-ai-classification-result.png" alt="CNN Project" width="3000" height="3000" />
-
----
-
-## Installation & Setup
-
-Follow the steps below to run the project locally.
-
-### Prerequisites
-
-Before installing the project, make sure you have:
-
-- Python 3.13 (64-bit)
-- Git
-- pip
-- A code editor such as VS Code
-
-> **Important:** For this project, Python **3.13 (64-bit)** is recommended.
->
-> TensorFlow currently provides supported packages for Python **3.10–3.13**. Python **3.14 is not currently listed as a supported version** by TensorFlow.
-
-Follow these steps to run the project locally:
+cat-dog-classifier/
+├── app.py                # Flask app + Keras (.keras) inference
+├── requirements.txt
+├── Procfile               # for Render / Heroku (gunicorn)
+├── templates/
+│   └── index.html         # PetVision AI frontend
+├── static/
+│   ├── style.css          # unused now (index.html has its own <style>) — safe to delete
+│   ├── dog.png             # <-- you need to add this: page background image
+│   └── uploads/            # uploaded images are saved here for preview
+└── model/
+    └── cat_dog_cnn_model_v2.keras   # <-- you need to add this file
 ```
-# 1. Clone the repository
-git clone https://github.com/YOUR_USERNAME/CNN-Cat-and-Dog-Classification.git
 
-# 2. Open the project folder
-cd CNN-Cat-and-Dog-Classification
+## 1. Add the model file and background image
 
-# 3. Create a Python 3.13 virtual environment
-py -3.13 -m venv venv
+This repo does **not** include the trained model. Grab the file already
+produced in your notebook (`Fine_Tune.ipynb`, section "11. Save the Final
+Model" — `model.save("cat_dog_cnn_model_v2.keras")`) and drop it here:
 
-# 4. Activate the virtual environment
-venv\Scripts\activate
+```
+model/cat_dog_cnn_model_v2.keras
+```
 
-# 5. Upgrade pip
-python -m pip install --upgrade pip
+No conversion step is needed for this version — it loads the `.keras`
+file directly with `tf.keras.models.load_model()`.
 
-# 6. Install project dependencies
+The template also expects a background image at `static/dog.png` — add any
+image with that filename, or edit the `body { background: url(...) }` rule
+in `templates/index.html` to point elsewhere.
+
+**Note on deploy size:** this version depends on full `tensorflow`, which
+is much heavier than the TFLite runtime (hundreds of MB vs a few MB). On
+Render's free tier this means slower builds and higher memory use at
+runtime — worth knowing if you hit build timeouts or out-of-memory errors.
+
+## 2. Run locally
+
+```bash
+python -m venv venv
+source venv/bin/activate      # Windows: venv\Scripts\activate
 pip install -r requirements.txt
-
-# 7. Start the Flask application
 python app.py
 ```
+
+Visit `http://localhost:5000` and upload an image.
+
+## 3. Deploy on Render
+
+1. Push this folder to a GitHub repo.
+2. On Render: **New → Web Service** → connect the repo.
+3. Build command: `pip install -r requirements.txt`
+4. Start command: `gunicorn app:app`
+5. Make sure `model/cat_dog_cnn_model_v2.keras` is actually committed to
+   the repo as a real binary (not a Git LFS pointer — check its file size
+   after cloning) — Render's filesystem is ephemeral otherwise and won't
+   have your model on deploy.
+
+## Notes
+
+- Input images are resized to 150×150 to match training (`IMG_SIZE` in the
+  notebook).
+- Preprocessing intentionally does **not** rescale by /255 — the
+  MobileNetV2 `preprocess_input` normalization is baked into the model
+  graph itself, so raw resized pixel values are passed straight to
+  `model.predict()` (matches the notebook's own inference cell).
