@@ -1,3 +1,5 @@
+ai-edge-litert
+keras
 Flask
 gunicorn
 Pillow
