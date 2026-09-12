@@ -6,7 +6,7 @@ A lightweight Flask web app that classifies uploaded images as **cat** or **dog*
 
 | Input | Result |
 |---|---|
-| ![Input screen](assets/petvision-ai-input-screen.png) | ![Classification result](assets/petvision-ai-classification-result.png) |
+| ![Input screen](petvision-ai-input-screen.png) | ![Classification result](petvision-ai-classification-result.png) |
 
 ## Features
 
