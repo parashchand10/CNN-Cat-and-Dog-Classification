@@ -1,6 +1,6 @@
 # PetVision AI — Cat vs. Dog Classifier
 
-A lightweight Flask web app that classifies uploaded images as **cat** or **dog** in real time, powered by a TensorFlow Lite model running through `ai-edge-litert`.
+PetVision AI is an end-to-end computer vision web application that classifies images of cats and dogs in real time. Powered by a custom Convolutional Neural Network (CNN) optimized into TensorFlow Lite, it delivers fast, lightweight inference served through a responsive Flask web interface.
 
 ## Demo
 
@@ -28,7 +28,7 @@ A lightweight Flask web app that classifies uploaded images as **cat** or **dog*
 cat-dog-classifier/
 ├── app.py                  # Flask app + TFLite inference
 ├── requirements.txt
-├── Procfile                 # Render / Heroku start command
+├── Procfile                 # Render
 ├── assets/                  # README screenshots
 ├── model/
 │   └── cat_dog_cnn_model.tflite
@@ -39,21 +39,14 @@ cat-dog-classifier/
     └── index.html
 ```
 
-## Getting Started
-
-### Prerequisites
-
-- Python 3.9+
-- pip
-
 ### Installation
 
 ```bash
-git clone https://github.com/<your-username>/cat-dog-classifier.git
-cd cat-dog-classifier
-python -m venv venv
-source venv/bin/activate      # Windows: venv\Scripts\activate
-pip install -r requirements.txt
+1. git clone https://github.com/<your-username>/cat-dog-classifier.git
+2. cd cat-dog-classifier
+3. python -m venv venv
+4. source venv/bin/activate      # Windows: venv\Scripts\activate
+5. pip install -r requirements.txt
 ```
 
 ### Run Locally
@@ -78,4 +71,3 @@ Then open `http://localhost:5000` and upload an image.
 3. **Build command:** `pip install -r requirements.txt`
 4. **Start command:** `gunicorn app:app`
 
-> **Note:** Render's free tier uses an ephemeral filesystem, so files saved to `static/uploads/` won't persist across restarts.
