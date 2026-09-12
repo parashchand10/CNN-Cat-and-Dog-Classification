@@ -12,7 +12,7 @@ from ai_edge_litert.interpreter import Interpreter
 app = Flask(__name__)
 
 BASE_DIR = os.path.dirname(os.path.abspath(__file__))
-MODEL_PATH = os.path.join(BASE_DIR, "model", "cat_dog_cnn_model_v2.tflite")
+MODEL_PATH = os.path.join(BASE_DIR, "model", "cat_dog_cnn_model.tflite")
 UPLOAD_DIR = os.path.join(BASE_DIR, "static", "uploads")
 IMG_SIZE = (150, 150)  # must match training (see Fine_Tune.ipynb)
 
