@@ -79,7 +79,3 @@ Then open `http://localhost:5000` and upload an image.
 4. **Start command:** `gunicorn app:app`
 
 > **Note:** Render's free tier uses an ephemeral filesystem, so files saved to `static/uploads/` won't persist across restarts.
-
-## License
-
-This project is available for personal and educational use. Add a license file if you plan to distribute it publicly.
