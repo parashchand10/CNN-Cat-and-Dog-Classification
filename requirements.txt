@@ -2,4 +2,5 @@ Flask
 gunicorn
 Pillow
 numpy
-ai-edge-litert
+tensorflow
+keras
