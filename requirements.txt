@@ -1,6 +1,9 @@
 Flask
 gunicorn
 Pillow
-numpy
 tensorflow
 keras
+numpy
+pandas
+matplotlib
+seaborn
